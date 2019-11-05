@@ -1,0 +1,108 @@
+ <h1 style="text-align: center">  IAGREE DB TOOL </h1>
+
+<div class="container">
+  <div class="row">
+<!--<div style="width: 300px;" id = "maindiv">-->
+  <form (ngSubmit)="FetchData()">
+    <!--<div class="form-group">-->
+    <input type="text" [(ngModel)]="id" [ngModelOptions]="{standalone: true}">
+
+    <!--</div>-->
+    <!--class="form-control"-->
+
+    <div class="btn-group">
+      <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+<!--    {{display}}-->
+  </form>
+   </div>
+  </div>
+<!--</div>-->
+
+<hr>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div *ngIf="details" class="table-responsive">
+        <table *ngIf="details" summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>e-mail</th>
+            <th>Employee Number</th>
+            <th>Racf Id</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>{{details.g.anwName}}</td>
+            <td>{{details.g.anwVorname}} </td>
+            <td>{{details.g.anwEmail}}</td>
+            <td>{{details.g.anwEmployeeNr}}</td>
+            <td>{{details.g.anwRacf}}</td>
+          </tr>
+
+          </tbody>
+        </table>
+      </div>
+      <br>
+      <div *ngIf="details" class="table-responsive">
+        <table *ngIf="details.livesystems.length > 0" summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
+          <thead>
+          <tr>
+            <th>Sr No.</th>
+            <th>System Name</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let live of details.livesystems;let i = index;">
+            <td>{{i+1}}</td>
+            <td>{{live.sysName}} </td>
+          </tr>
+
+          </tbody>
+        </table>
+        <div *ngIf="details.livesystems.length == 0">No Live Systems Data Found</div>
+      </div>
+      <br>
+      <div *ngIf="details" class="table-responsive">
+        <div class="search-hero">
+          <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="">
+        </div>
+        <table *ngIf="details.processdetails.length > 0" summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
+          <thead>
+          <tr>
+            <th>Sr No.</th>
+            <th>UUId</th>
+            <th>Status</th>
+            <th>Verfallsdatum</th>
+            <th>Eingestellt AM</th>
+            <th>System Id</th>
+            <th>Last Updated Client Id</th>
+            <th>System Name</th>
+            <th>History Event</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let process of details.processdetails | filter:searchText; let i = index;">
+            <td>{{i+1}}</td>
+            <td>{{process.vgUuid}}</td>
+            <td>{{process.vgStatus}}</td>
+            <td>{{process.vgVerfallsdatum}}</td>
+            <td>{{process.vgEingestelltAm}}</td>
+            <td>{{process.sysId}}</td>
+            <td>{{process.LastUpdatedClientId}}</td>
+            <td>{{process.SysName}}</td>
+            <td>{{process.hisHistoryEvent}}</td>
+          </tr>
+
+          </tbody>
+        </table>
+        <div *ngIf="details.processdetails.length == 0">No Proccesses Found</div>
+      </div>
+    </div>
+  </div>
+</div>
+
